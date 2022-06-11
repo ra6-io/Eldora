@@ -46,6 +46,11 @@ public sealed class DnDHelper
 	/// </summary>
 	public static DnDHelper Instance { get; private set; }
 
+	/// <summary>
+	/// The platform handler
+	/// </summary>
+	public IPlatformHandler PlatformHandler { get; }
+
 	private MainForm _mainForm;
 
 	/// <summary>
@@ -53,9 +58,11 @@ public sealed class DnDHelper
 	/// </summary>
 	public MainForm MainForm => _mainForm ??= new MainForm();
 
-	public DnDHelper()
+	public DnDHelper(IPlatformHandler platformHandler)
 	{
 		Instance = this;
+
+		PlatformHandler = platformHandler;
 
 		InitLogger();
 		InitPaths();

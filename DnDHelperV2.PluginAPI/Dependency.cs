@@ -1,5 +1,8 @@
 ﻿namespace DnDHelperV2.PluginAPI;
 
+/// <summary>
+/// Any dependency will be declared as this
+/// </summary>
 public sealed record Dependency
 {
 	/// <summary>

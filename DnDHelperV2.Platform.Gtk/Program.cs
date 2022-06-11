@@ -8,7 +8,7 @@ namespace DnDHelperV2.Gtk
 	    [STAThread]
 	    public static void Main(string[] args)
 	    {
-		    new Application(Eto.Platforms.Gtk).Run(new DnDHelper().MainForm);
+		    new Application(Eto.Platforms.Gtk).Run(new DnDHelper(new LinuxPlatformHandler()).MainForm);
 	    }
     }
 }

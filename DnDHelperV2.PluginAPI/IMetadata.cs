@@ -1,5 +1,8 @@
 ﻿namespace DnDHelperV2.PluginAPI;
 
+/// <summary>
+/// The class implementing this interface will declare all information from the plugin
+/// </summary>
 public interface IMetadata
 {
 	/// <summary>

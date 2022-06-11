@@ -88,6 +88,5 @@ public sealed class PointBuyConfig
 				> 18 => PointCosts[15],
 				_ => PointCosts[totalScore - 3]
 		};
-
 	}
 }

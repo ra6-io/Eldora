@@ -1,13 +1,10 @@
 using System;
-using System.ComponentModel;
 using Eto.Forms;
-using Serilog;
 using Size = Eto.Drawing.Size;
 
 // TODO: API Support https://www.dnd5eapi.co/docs/#overview--getting-started
 // TODO: API Support https://www.dnddeutsch.de/api/
 // TODO: https://docs.github.com/en/rest/repos/repos
-// TODO: Add Plugin Repo https://github.com/ra6-io/DnDHelperV2.Plugins
 
 namespace DnDHelperV2
 {
@@ -27,6 +24,7 @@ namespace DnDHelperV2
 
         public MainForm()
         {
+	        // Fixes termination on mac
             Closed += KillProgramOnMainWindowExit;
             Application.Instance.Terminating += (s, e) => Closed -= KillProgramOnMainWindowExit;
 

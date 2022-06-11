@@ -30,6 +30,7 @@ public sealed class PluginLoader
 		{
 			if (!pluginFile.EndsWith(".dll")) continue;
 
+			// loads plugin dll
 			var dll = Assembly.LoadFile(pluginFile);
 
 			// checks for all exported types for metadata
@@ -86,9 +87,11 @@ public sealed class PluginLoader
 					Directory.CreateDirectory(folder);
 				}
 
-				// Sets metadata for plugin
+				// Sets data for plugin
 				typeof(AbstractPlugin).GetField(nameof(plugin.Metadata))?.SetValue(plugin, metadata);
 				typeof(AbstractPlugin).GetField(nameof(plugin.PluginFolder))?.SetValue(plugin, folder);
+				typeof(AbstractPlugin).GetField(nameof(plugin.MainWindow))?.SetValue(plugin, DnDHelper.Instance.MainForm);
+				typeof(AbstractPlugin).GetField(nameof(plugin.PlatformHandler))?.SetValue(plugin, DnDHelper.Instance.PlatformHandler);
 
 				// Loads the plugin
 				plugin.OnLoad();
@@ -118,6 +121,7 @@ public sealed class PluginLoader
 
 		foreach (var dependency in dependencies)
 		{
+			// checks if dependency version is allowed
 			var hasDependency = loadedMetadatas.Any(
 					x => x.PluginName == dependency.PluginName &&
 					     IsVersionBetween(x.PluginVersion, dependency.MinimalVersion, dependency.MaximalVersion));

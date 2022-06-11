@@ -1,0 +1,152 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\DnDHelperV2.PluginAPI\DnDHelperV2.PluginAPI.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="fifthed_border_medium.png" />
+      <None Remove="88976.jpg" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Include="DefaultBorders\fifthed_border_medium.png" />
+      <None Remove="DefaultBorders\12_sided_ring_1.png" />
+      <EmbeddedResource Include="DefaultBorders\12_sided_ring_1.png" />
+      <None Remove="DefaultBorders\fifthed_border_medium_greyscale.png" />
+      <EmbeddedResource Include="DefaultBorders\fifthed_border_medium_greyscale.png" />
+      <None Remove="DefaultBorders\abstract_triangle_1.png" />
+      <EmbeddedResource Include="DefaultBorders\abstract_triangle_1.png" />
+      <None Remove="DefaultBorders\abstract_octagon_1_flat.png" />
+      <EmbeddedResource Include="DefaultBorders\abstract_octagon_1_flat.png" />
+      <None Remove="DefaultBorders\abstract_ring_1_flat.png" />
+      <EmbeddedResource Include="DefaultBorders\abstract_ring_1_flat.png" />
+      <None Remove="DefaultBorders\10_sided_ring_mask.png" />
+      <EmbeddedResource Include="DefaultBorders\10_sided_ring_mask.png" />
+      <None Remove="DefaultBorders\abstract_octagon_1.png" />
+      <EmbeddedResource Include="DefaultBorders\abstract_octagon_1.png" />
+      <None Remove="DefaultBorders\plain_hexagon_mask.png" />
+      <EmbeddedResource Include="DefaultBorders\plain_hexagon_mask.png" />
+      <None Remove="DefaultBorders\abstract_double_ring_1.png" />
+      <EmbeddedResource Include="DefaultBorders\abstract_double_ring_1.png" />
+      <None Remove="DefaultBorders\abstract_ring_3.png" />
+      <EmbeddedResource Include="DefaultBorders\abstract_ring_3.png" />
+      <None Remove="DefaultBorders\abstract_ring_3_flat.png" />
+      <EmbeddedResource Include="DefaultBorders\abstract_ring_3_flat.png" />
+      <None Remove="DefaultBorders\abstract_triangle_mask.png" />
+      <EmbeddedResource Include="DefaultBorders\abstract_triangle_mask.png" />
+      <None Remove="DefaultBorders\abstract_double_ring_1_flat.png" />
+      <EmbeddedResource Include="DefaultBorders\abstract_double_ring_1_flat.png" />
+      <None Remove="DefaultBorders\spike_ring_2.png" />
+      <EmbeddedResource Include="DefaultBorders\spike_ring_2.png" />
+      <None Remove="DefaultBorders\abstract_ring_1.png" />
+      <EmbeddedResource Include="DefaultBorders\abstract_ring_1.png" />
+      <None Remove="DefaultBorders\plain_square_mask.png" />
+      <EmbeddedResource Include="DefaultBorders\plain_square_mask.png" />
+      <None Remove="DefaultBorders\plain_ring_1.png" />
+      <EmbeddedResource Include="DefaultBorders\plain_ring_1.png" />
+      <None Remove="DefaultBorders\spike_ring_1.png" />
+      <EmbeddedResource Include="DefaultBorders\spike_ring_1.png" />
+      <None Remove="DefaultBorders\cloud_ring_1.png" />
+      <EmbeddedResource Include="DefaultBorders\cloud_ring_1.png" />
+      <None Remove="DefaultBorders\plain_octagon_1.png" />
+      <EmbeddedResource Include="DefaultBorders\plain_octagon_1.png" />
+      <None Remove="DefaultBorders\abstract_ring_2_flat.png" />
+      <EmbeddedResource Include="DefaultBorders\abstract_ring_2_flat.png" />
+      <None Remove="DefaultBorders\plain_ring_1_with_arrow_1.png" />
+      <EmbeddedResource Include="DefaultBorders\plain_ring_1_with_arrow_1.png" />
+      <None Remove="DefaultBorders\double_ring_1.png" />
+      <EmbeddedResource Include="DefaultBorders\double_ring_1.png" />
+      <None Remove="DefaultBorders\plain_square_2.png" />
+      <EmbeddedResource Include="DefaultBorders\plain_square_2.png" />
+      <None Remove="DefaultBorders\10_sided_ring_1.png" />
+      <EmbeddedResource Include="DefaultBorders\10_sided_ring_1.png" />
+      <None Remove="DefaultBorders\plain_ring_3.png" />
+      <EmbeddedResource Include="DefaultBorders\plain_ring_3.png" />
+      <None Remove="DefaultBorders\plain_ring_2.png" />
+      <EmbeddedResource Include="DefaultBorders\plain_ring_2.png" />
+      <None Remove="DefaultBorders\wavey_ring_1.png" />
+      <EmbeddedResource Include="DefaultBorders\wavey_ring_1.png" />
+      <None Remove="DefaultBorders\cloud_ring_1_mask.png" />
+      <EmbeddedResource Include="DefaultBorders\cloud_ring_1_mask.png" />
+      <None Remove="DefaultBorders\wavey_ring_1_mask.png" />
+      <EmbeddedResource Include="DefaultBorders\wavey_ring_1_mask.png" />
+      <None Remove="DefaultBorders\12_sided_ring_mask.png" />
+      <EmbeddedResource Include="DefaultBorders\12_sided_ring_mask.png" />
+      <None Remove="DefaultBorders\plain_ring_mask.png" />
+      <EmbeddedResource Include="DefaultBorders\plain_ring_mask.png" />
+      <None Remove="DefaultBorders\plain_octagon_mask.png" />
+      <EmbeddedResource Include="DefaultBorders\plain_octagon_mask.png" />
+      <None Remove="DefaultBorders\abstract_ring_2.png" />
+      <EmbeddedResource Include="DefaultBorders\abstract_ring_2.png" />
+      <None Remove="DefaultBorders\plain_hexagon_1.png" />
+      <EmbeddedResource Include="DefaultBorders\plain_hexagon_1.png" />
+      <None Remove="DefaultBorders\plain_square_1.png" />
+      <EmbeddedResource Include="DefaultBorders\plain_square_1.png" />
+      <None Remove="DefaultBorders\fifthed_border_medium.json" />
+      <EmbeddedResource Include="DefaultBorders\fifthed_border_medium.json" />
+      <None Remove="DefaultBorders\10_sided_ring.json" />
+      <EmbeddedResource Include="DefaultBorders\10_sided_ring_1.json" />
+      <None Remove="DefaultBorders\12_sided_ring.json" />
+      <EmbeddedResource Include="DefaultBorders\12_sided_ring_1.json" />
+      <None Remove="DefaultBorders\abstract_double_ring_1.json" />
+      <EmbeddedResource Include="DefaultBorders\abstract_double_ring_1.json" />
+      <None Remove="DefaultBorders\abstract_double_ring_1_flat.json" />
+      <EmbeddedResource Include="DefaultBorders\abstract_double_ring_1_flat.json" />
+      <None Remove="DefaultBorders\abstract_octagon_1.json" />
+      <EmbeddedResource Include="DefaultBorders\abstract_octagon_1.json" />
+      <None Remove="DefaultBorders\abstract_octagon_1_flat.json" />
+      <EmbeddedResource Include="DefaultBorders\abstract_octagon_1_flat.json" />
+      <None Remove="DefaultBorders\abstract_ring_1.json" />
+      <EmbeddedResource Include="DefaultBorders\abstract_ring_1.json" />
+      <None Remove="DefaultBorders\abstract_ring_1_flat.json" />
+      <EmbeddedResource Include="DefaultBorders\abstract_ring_1_flat.json" />
+      <None Remove="DefaultBorders\abstract_ring_2.json" />
+      <EmbeddedResource Include="DefaultBorders\abstract_ring_2.json" />
+      <None Remove="DefaultBorders\abstract_ring_2_flat.json" />
+      <EmbeddedResource Include="DefaultBorders\abstract_ring_2_flat.json" />
+      <None Remove="DefaultBorders\abstract_ring_3.json" />
+      <EmbeddedResource Include="DefaultBorders\abstract_ring_3.json" />
+      <None Remove="DefaultBorders\abstract_ring_3_flat.json" />
+      <EmbeddedResource Include="DefaultBorders\abstract_ring_3_flat.json" />
+      <None Remove="DefaultBorders\abstract_triangle_1.json" />
+      <EmbeddedResource Include="DefaultBorders\abstract_triangle_1.json" />
+      <None Remove="DefaultBorders\cloud_ring_1.json" />
+      <EmbeddedResource Include="DefaultBorders\cloud_ring_1.json" />
+      <None Remove="DefaultBorders\double_ring_1.json" />
+      <EmbeddedResource Include="DefaultBorders\double_ring_1.json" />
+      <None Remove="DefaultBorders\empty.json" />
+      <None Remove="DefaultBorders\empty.png" />
+      <None Remove="DefaultBorders\fifthed_border_medium_greyscale.json" />
+      <EmbeddedResource Include="DefaultBorders\fifthed_border_medium_greyscale.json" />
+      <None Remove="DefaultBorders\plain_hexagon_1.json" />
+      <EmbeddedResource Include="DefaultBorders\plain_hexagon_1.json" />
+      <None Remove="DefaultBorders\plain_octagon_1.json" />
+      <EmbeddedResource Include="DefaultBorders\plain_octagon_1.json" />
+      <None Remove="DefaultBorders\plain_ring_1.json" />
+      <EmbeddedResource Include="DefaultBorders\plain_ring_1.json" />
+      <None Remove="DefaultBorders\plain_ring_1_with_arrow_1.json" />
+      <EmbeddedResource Include="DefaultBorders\plain_ring_1_with_arrow_1.json" />
+      <None Remove="DefaultBorders\plain_ring_2.json" />
+      <EmbeddedResource Include="DefaultBorders\plain_ring_2.json" />
+      <None Remove="DefaultBorders\plain_ring_3.json" />
+      <EmbeddedResource Include="DefaultBorders\plain_ring_3.json" />
+      <None Remove="DefaultBorders\plain_square_1.json" />
+      <EmbeddedResource Include="DefaultBorders\plain_square_1.json" />
+      <None Remove="DefaultBorders\plain_square_2.json" />
+      <EmbeddedResource Include="DefaultBorders\plain_square_2.json" />
+      <None Remove="DefaultBorders\spike_ring_1.json" />
+      <EmbeddedResource Include="DefaultBorders\spike_ring_1.json" />
+      <None Remove="DefaultBorders\spike_ring_2.json" />
+      <EmbeddedResource Include="DefaultBorders\spike_ring_2.json" />
+      <None Remove="DefaultBorders\wavey_ring_1.json" />
+      <EmbeddedResource Include="DefaultBorders\wavey_ring_1.json" />
+    </ItemGroup>
+
+</Project>

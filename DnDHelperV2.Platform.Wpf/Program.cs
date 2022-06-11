@@ -8,7 +8,7 @@ namespace DnDHelperV2.Wpf
 		[STAThread]
 		public static void Main(string[] args)
 		{
-			new Application(Eto.Platforms.Wpf).Run(new DnDHelper().MainForm);
+			new Application(Eto.Platforms.Wpf).Run(new DnDHelper(new WindowsPlatformHandler()).MainForm);
 		}
 	}
 }

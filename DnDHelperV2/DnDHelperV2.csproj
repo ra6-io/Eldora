@@ -18,19 +18,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Remove="Updater\**" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <EmbeddedResource Remove="Updater\**" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <None Remove="Updater\**" />
-    </ItemGroup>
-
-    <ItemGroup>
       <Folder Include="Extensions" />
+      <Folder Include="InternalComponents\PluginPage" />
+      <Folder Include="Updater" />
     </ItemGroup>
 
 </Project>
