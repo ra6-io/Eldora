@@ -18,7 +18,7 @@ public sealed class TokenCreatorPlugin : AbstractPlugin
 	{
 		return new List<IComponent>
 		{
-				
+				new TokenCreatorPage()
 		};
 	}
 
@@ -93,42 +93,43 @@ public sealed class TokenCreatorPlugin : AbstractPlugin
 	private void LoadBorders()
 	{
 		foreach (var file in Directory.GetFiles(BordersImagesPath, "*.json"))
-		try
-		{
-			var border = JsonConvert.DeserializeObject<BorderObject>(File.ReadAllText(file));
-			if (border == null)
+			try
 			{
-				Log.Error("Failed to load border {File}", file);
-				continue;
-			}
+				var border = JsonConvert.DeserializeObject<BorderObject>(File.ReadAllText(file));
 
-			if (!File.Exists(Path.Combine(BordersImagesPath, border.ImageName)))
-			{
-				Log.Error("Image {ImageName} not found ({Path})",
+				if (border == null)
+				{
+					Log.Error("Failed to load border {File}", file);
+					continue;
+				}
+
+				if (!File.Exists(Path.Combine(BordersImagesPath, border.ImageName)))
+				{
+					Log.Error("Image {ImageName} not found ({Path})",
+							border.ImageName,
+							Path.Combine(BordersImagesPath, border.ImageName));
+					continue;
+				}
+
+				if (!File.Exists(Path.Combine(BordersImagesPath, border.MaskName)))
+				{
+					Log.Error("Mask {MaskName} not found ({Path})",
+							border.MaskName,
+							Path.Combine(BordersImagesPath, border.MaskName));
+					continue;
+				}
+
+				Borders.Add(border);
+
+				Log.Information("Loaded border {BorderName} with (ImageName: {ImageName} - MaskName: {MaskName})",
+						border.BorderName,
 						border.ImageName,
-						Path.Combine(BordersImagesPath, border.ImageName));
-				continue;
+						border.MaskName);
 			}
-
-			if (!File.Exists(Path.Combine(BordersImagesPath, border.MaskName)))
+			catch (JsonSerializationException e)
 			{
-				Log.Error("Mask {MaskName} not found ({Path})",
-						border.MaskName,
-						Path.Combine(BordersImagesPath, border.MaskName));
-				continue;
+				Log.Warning(e, "Failed to load border {File}", file);
 			}
-
-			Borders.Add(border);
-
-			Log.Information("Loaded border {BorderName} with (ImageName: {ImageName} - MaskName: {MaskName})",
-					border.BorderName,
-					border.ImageName,
-					border.MaskName);
-		}
-		catch (JsonSerializationException e)
-		{
-			Log.Warning(e, "Failed to load border {File}", file);
-		}
 	}
 
 	/// <summary>
