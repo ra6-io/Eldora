@@ -1,10 +1,14 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using DnDHelperV2.PluginAPI;
 using Serilog;
+
+#endregion
 
 namespace DnDHelperV2;
 
@@ -41,7 +45,7 @@ public sealed class PluginLoader
 				break;
 			}
 		}
-		
+
 		CheckDependenciesAndLoad(plugins);
 	}
 
@@ -61,44 +65,51 @@ public sealed class PluginLoader
 			var assembly = tuple.assembly;
 			var metadata = tuple.metadata;
 
-			// check for all dependencies
-			var allPresent = AllDependenciesPresent(metadata, metadatas);
-
-			// If any missing error
-			if (allPresent.Count != 0)
+			try
 			{
-				Log.Error("Plugin {PluginName} will not be loaded!: It has missing dependencies: {AllPresent}",
-						metadata.PluginName,
-						allPresent);
-				return;
-			}
+				// check for all dependencies
+				var allPresent = AllDependenciesPresent(metadata, metadatas);
 
-			// checks for all exported abstract plugins and loads exactly one
-			foreach (var type in assembly.GetExportedTypes())
-			{
-				if (!type.IsSubclassOf(typeof(AbstractPlugin))) continue;
-				var plugin = (AbstractPlugin)Activator.CreateInstance(type)!;
-
-				var folder = Path.Join(DnDHelper.PluginPath, metadata.PluginName);
-
-				// Creates the plugin directory if not exist
-				if (!Directory.Exists(folder))
+				// If any missing error
+				if (allPresent.Count != 0)
 				{
-					Directory.CreateDirectory(folder);
+					Log.Error("Plugin {PluginName} will not be loaded!: It has missing dependencies: {AllPresent}",
+							metadata.PluginName,
+							allPresent);
+					return;
 				}
 
-				// Sets data for plugin
-				typeof(AbstractPlugin).GetField(nameof(plugin.Metadata))?.SetValue(plugin, metadata);
-				typeof(AbstractPlugin).GetField(nameof(plugin.PluginFolder))?.SetValue(plugin, folder);
-				typeof(AbstractPlugin).GetField(nameof(plugin.MainWindow))?.SetValue(plugin, DnDHelper.Instance.MainForm);
-				typeof(AbstractPlugin).GetField(nameof(plugin.PlatformHandler))?.SetValue(plugin, DnDHelper.Instance.PlatformHandler);
+				// checks for all exported abstract plugins and loads exactly one
+				foreach (var type in assembly.GetExportedTypes())
+				{
+					if (!type.IsSubclassOf(typeof(AbstractPlugin))) continue;
+					var plugin = (AbstractPlugin)Activator.CreateInstance(type)!;
 
-				// Loads the plugin
-				plugin.OnLoad();
-				Log.Information("Loaded plugin {PluginName}", metadata.PluginName);
+					var folder = Path.Join(DnDHelper.PluginPath, metadata.PluginName);
 
-				loadedPlugins.Add(plugin);
-				break;
+					// Creates the plugin directory if not exist
+					if (!Directory.Exists(folder))
+					{
+						Directory.CreateDirectory(folder);
+					}
+
+					// Sets data for plugin
+					typeof(AbstractPlugin).GetField(nameof(plugin.Metadata))?.SetValue(plugin, metadata);
+					typeof(AbstractPlugin).GetField(nameof(plugin.PluginFolder))?.SetValue(plugin, folder);
+					typeof(AbstractPlugin).GetField(nameof(plugin.MainWindow))?.SetValue(plugin, DnDHelper.Instance.MainForm);
+					typeof(AbstractPlugin).GetField(nameof(plugin.PlatformHandler))?.SetValue(plugin, DnDHelper.Instance.PlatformHandler);
+
+					// Loads the plugin
+					plugin.OnLoad();
+					Log.Information("Loaded plugin {PluginName}", metadata.PluginName);
+
+					loadedPlugins.Add(plugin);
+					break;
+				}
+			}
+			catch (Exception e)
+			{
+				Log.Error(e, "Error while loading plugin {PluginName}", tuple.metadata.PluginName);
 			}
 		});
 

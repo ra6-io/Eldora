@@ -1,5 +1,10 @@
-﻿using System;
+﻿#region
+
+using System;
+using Eto;
 using Eto.Forms;
+
+#endregion
 
 namespace DnDHelperV2.Wpf
 {
@@ -8,7 +13,7 @@ namespace DnDHelperV2.Wpf
 		[STAThread]
 		public static void Main(string[] args)
 		{
-			new Application(Eto.Platforms.Wpf).Run(new DnDHelper(new WindowsPlatformHandler()).MainForm);
+			new Application(Platforms.Wpf).Run(new DnDHelper(new WindowsPlatformHandler()).MainForm);
 		}
 	}
 }

@@ -1,6 +1,10 @@
-﻿using DnDHelperV2.PluginAPI;
+﻿#region
+
+using DnDHelperV2.PluginAPI;
 using Newtonsoft.Json;
 using Serilog;
+
+#endregion
 
 namespace Plugin.PointBuy;
 
@@ -8,14 +12,14 @@ public sealed class PointBuyPlugin : AbstractPlugin
 {
 	public static PointBuyPlugin Instance { get; private set; } = null!;
 
-	private readonly Dictionary<string, PointBuyConfig> _pointBuyConfigs = new();
+	private readonly Dictionary<string, PointBuyConfigObject> _pointBuyConfigs = new();
 
 	private string _pointBuyConfigsPath = null!;
 	private string _defaultConfigPath = null!;
 
-	private PointBuyConfig? _selectedConfig;
+	private PointBuyConfigObject? _selectedConfig;
 
-	public PointBuyConfig DefaultConfig { get; private set; } = null!;
+	public PointBuyConfigObject DefaultConfig { get; private set; } = null!;
 
 	public override List<IComponent> GetComponents()
 	{
@@ -29,11 +33,7 @@ public sealed class PointBuyPlugin : AbstractPlugin
 	{
 		Instance = this;
 
-		// Default config
-		DefaultConfig = new PointBuyConfig();
-
 		_pointBuyConfigsPath = Path.Join(PluginFolder, "configs");
-		_defaultConfigPath = Path.Join(_pointBuyConfigsPath, "rules_as_written.json");
 
 		if (!Directory.Exists(_pointBuyConfigsPath))
 		{
@@ -41,17 +41,12 @@ public sealed class PointBuyPlugin : AbstractPlugin
 			Directory.CreateDirectory(_pointBuyConfigsPath);
 		}
 
-		// create default config if not exist
-		if (!File.Exists(_defaultConfigPath))
-		{
-			File.WriteAllText(_defaultConfigPath,
-					JsonConvert.SerializeObject(DefaultConfig, Formatting.Indented));
-		}
+		// TODO: Extract all configs from default configs
 
 		// Loads all files from the config path as configurations
 		foreach (var file in Directory.GetFiles(_pointBuyConfigsPath))
 		{
-			var config = JsonConvert.DeserializeObject<PointBuyConfig>(File.ReadAllText(file));
+			var config = JsonConvert.DeserializeObject<PointBuyConfigObject>(File.ReadAllText(file));
 
 			if (config == null)
 			{
@@ -69,8 +64,8 @@ public sealed class PointBuyPlugin : AbstractPlugin
 			Log.Information("\t {Config}", config.Value);
 		}
 	}
-	
-	public PointBuyConfig SelectedConfig()
+
+	public PointBuyConfigObject SelectedConfig()
 	{
 		return _selectedConfig ?? DefaultConfig;
 	}
