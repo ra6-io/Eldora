@@ -1,35 +1,33 @@
-﻿using System.Runtime.Serialization;
+﻿#region
+
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Serilog;
+
+#endregion
 
 namespace Plugin.PointBuy;
 
 [JsonObject(MemberSerialization.OptIn)]
-public sealed class PointBuyConfig
+public sealed class PointBuyConfigObject
 {
 	/// <summary>
 	/// The number of points available to spend.
 	/// </summary>
 	[JsonProperty("available_points")]
-	public int AvailablePoints { get; set; } = DefaultAvailablePoints;
-
-	private static readonly int DefaultAvailablePoints = 27;
+	public int AvailablePoints { get; set; }
 
 	/// <summary>
 	/// The maximum points to spend on a single attribute.
 	/// </summary>
 	[JsonProperty("maximum_points")]
-	public int MaximumPurchaseable { get; set; } = DefaultMaximumPurchaseable;
-
-	private static readonly int DefaultMaximumPurchaseable = 15;
+	public int MaximumPurchaseable { get; set; }
 
 	/// <summary>
 	/// The minimum points to spend on a single attribute.
 	/// </summary>
 	[JsonProperty("minimum_points")]
-	public int MinimumPurchaseable { get; set; } = DefaultMinimumPurchaseable;
-
-	private static readonly int DefaultMinimumPurchaseable = 8;
+	public int MinimumPurchaseable { get; set; }
 
 	/// <summary>
 	/// The cost of a points.

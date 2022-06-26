@@ -33,8 +33,9 @@ public abstract class AbstractPlugin
 	/// Will be called when the plugin is disabled
 	/// </summary>
 	public virtual void OnDisable() {}
-	
+
 #region UTILS
+
 	/// <summary>
 	/// The metadata of the plugin
 	/// Will be set by the plugin loader
@@ -56,6 +57,7 @@ public abstract class AbstractPlugin
 	/// The platform handler
 	/// </summary>
 	public readonly IPlatformHandler PlatformHandler = null!;
+
 #endregion
 
 }

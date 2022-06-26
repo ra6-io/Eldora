@@ -1,10 +1,16 @@
-﻿using System;
+﻿#region
+
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using DnDHelperV2.InternalComponents;
 using DnDHelperV2.PluginAPI;
 using Eto.Forms;
+using Newtonsoft.Json;
 using Serilog;
+
+#endregion
 
 namespace DnDHelperV2;
 
@@ -32,6 +38,13 @@ public sealed class DnDHelper
 	public static readonly string LogPath = Path.Combine(RootPath, "logs");
 
 	/// <summary>
+	///     The path for the settings
+	/// </summary>
+	public static readonly string SettingPath = Path.Combine(RootPath, "settings.json");
+
+	private const string DefaultResourceDataPath = "DefaultData";
+
+	/// <summary>
 	/// Gets parsed by config sometime
 	/// </summary>
 	private const bool DebugModeActivated = true;
@@ -51,6 +64,11 @@ public sealed class DnDHelper
 	/// </summary>
 	public IPlatformHandler PlatformHandler { get; }
 
+	/// <summary>
+	///     The settings instance
+	/// </summary>
+	public SettingsObject Settings { get; private set; } = null!;
+
 	private MainForm _mainForm;
 
 	/// <summary>
@@ -67,14 +85,23 @@ public sealed class DnDHelper
 		InitLogger();
 		InitPaths();
 
+		LoadSettings();
+
 		PluginLoader = new PluginLoader();
 		PluginLoader.LoadPlugins(PluginPath);
 
 		// Enables all plugins
 		PluginLoader.ForEachLoadedPlugin(data =>
 		{
-			data.plugin.OnEnable();
-			Log.Information("Enabled plugin {Plugin}", data.metadata.PluginName);
+			try
+			{
+				data.plugin.OnEnable();
+				Log.Information("Enabled plugin {Plugin}", data.metadata.PluginName);
+			}
+			catch (Exception e)
+			{
+				Log.Error(e, "Failed to enable plugin {Plugin}", data.metadata.PluginName);
+			}
 		});
 
 		// Add components from plugins
@@ -82,17 +109,28 @@ public sealed class DnDHelper
 		{
 			if (!data.metadata.HasTabComponents) return;
 
-			foreach (var component in data.plugin.GetComponents())
+			try
 			{
-				if (component is not ITabComponent tabComponent) continue;
+				var tabsToAdd = new List<TabPage>();
 
-				var tab = new TabPage
+				foreach (var component in data.plugin.GetComponents())
 				{
-						Text = tabComponent.Title,
-						Content = tabComponent.GetRootPanel()
-				};
-				Log.Debug("Adding tab {Title} from plugin {Plugin}", tabComponent.Title, data.metadata.PluginName);
-				((TabControl)MainForm.Content).Pages.Add(tab);
+					if (component is not ITabComponent tabComponent) continue;
+
+					var tab = new TabPage
+					{
+							Text = tabComponent.Title,
+							Content = tabComponent.GetRootPanel()
+					};
+					Log.Debug("Adding tab {Title} from plugin {Plugin}", tabComponent.Title, data.metadata.PluginName);
+					tabsToAdd.Add(tab);
+				}
+
+				tabsToAdd.ForEach(tab => ((TabControl)MainForm.Content).Pages.Add(tab));
+			}
+			catch (Exception e)
+			{
+				Log.Error(e, "Failed to add tabs from plugin {Plugin}", data.metadata.PluginName);
 			}
 		});
 
@@ -119,8 +157,15 @@ public sealed class DnDHelper
 		{
 			PluginLoader.ForEachLoadedPlugin(data =>
 			{
-				data.plugin.OnDisable();
-				Log.Information("Disabled plugin {Plugin}", data.metadata.PluginName);
+				try
+				{
+					data.plugin.OnDisable();
+					Log.Information("Disabled plugin {Plugin}", data.metadata.PluginName);
+				}
+				catch (Exception e)
+				{
+					Log.Error(e, "Failed to disable plugin {Plugin}", data.metadata.PluginName);
+				}
 			});
 		};
 
@@ -129,12 +174,40 @@ public sealed class DnDHelper
 		{
 			PluginLoader.ForEachLoadedPlugin(data =>
 			{
-				data.plugin.OnUnload();
-				Log.Information("Unloaded plugin {Plugin}", data.metadata.PluginName);
+				try
+				{
+					data.plugin.OnUnload();
+					Log.Information("Unloaded plugin {Plugin}", data.metadata.PluginName);
+				}
+				catch (Exception e)
+				{
+					Log.Error(e, "Failed to unload plugin {Plugin}", data.metadata.PluginName);
+				}
 			});
 
 			Log.CloseAndFlush();
 		};
+	}
+
+	/// <summary>
+	///     Loads the settings
+	/// </summary>
+	private void LoadSettings()
+	{
+		Utils.WriteResourceToFileIfNotExists($"{DefaultResourceDataPath}.settings.json", SettingPath);
+
+		try
+		{
+			Settings = JsonConvert.DeserializeObject<SettingsObject>(File.ReadAllText(SettingPath));
+		}
+		catch (JsonSerializationException e)
+		{
+			Log.Warning(e, "Failed to load settings {Path} writing default", SettingPath);
+			//MessageBox.Show("Failed to load settings. Please check the log for more information.", "Error", MessageBoxButtons.OK, MessageBoxType.Error);
+			//Environment.Exit(1);
+			Utils.WriteResourceToFile($"{DefaultResourceDataPath}.settings.json", SettingPath);
+			Settings = JsonConvert.DeserializeObject<SettingsObject>(File.ReadAllText(SettingPath));
+		}
 	}
 
 	/// <summary>

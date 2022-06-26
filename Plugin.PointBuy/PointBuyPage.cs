@@ -1,8 +1,14 @@
-﻿using DnDHelperV2.PluginAPI;
+﻿#region
+
+using DnDHelperV2.PluginAPI;
 using Eto.Drawing;
 using Eto.Forms;
 
+#endregion
+
 namespace Plugin.PointBuy;
+
+// TODO: Update UI
 
 public sealed class PointBuyPage : ITabComponent
 {
@@ -23,7 +29,7 @@ public sealed class PointBuyPage : ITabComponent
 
 	private delegate void UpdateEventHandler(object sender);
 
-	private event UpdateEventHandler UpdateEvent;
+	private event UpdateEventHandler? UpdateEvent;
 
 	private readonly Dictionary<Attribute, AttributeValues> _attributeData = new()
 	{
@@ -58,15 +64,16 @@ public sealed class PointBuyPage : ITabComponent
 				}
 		};
 		ResetValues();
-		
+
 		var layout = new StackLayout
 		{
 				//BackgroundColor = Colors.Red,
 				Orientation = Orientation.Vertical,
 				HorizontalContentAlignment = HorizontalAlignment.Stretch
 		};
-		
+
 		layout.Items.Add(table);
+
 		layout.Items.Add(new GroupBox
 		{
 				Text = "Config",
@@ -86,7 +93,7 @@ public sealed class PointBuyPage : ITabComponent
 			value.AbilityScore = PointBuyPlugin.Instance.SelectedConfig().MinimumPurchaseable;
 		}
 
-		UpdateEvent(this);
+		UpdateEvent?.Invoke(this);
 	}
 
 	private TableRow BuildBottomRow()
@@ -252,7 +259,7 @@ public sealed class PointBuyPage : ITabComponent
 			var attr = _attributeData[attribute];
 			attr.AbilityScore = (int)abilityScoreStepper.Value;
 
-			UpdateEvent(this);
+			UpdateEvent?.Invoke(this);
 		};
 
 		UpdateEvent += _ =>

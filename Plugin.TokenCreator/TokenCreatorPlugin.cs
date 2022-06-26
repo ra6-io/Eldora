@@ -1,10 +1,14 @@
-﻿using System.Reflection;
+﻿#region
+
 using DnDHelperV2.PluginAPI;
-using Eto.Drawing;
 using Newtonsoft.Json;
 using Serilog;
 
+#endregion
+
 namespace Plugin.TokenCreator;
+
+// TODO: Fix performance
 
 public sealed class TokenCreatorPlugin : AbstractPlugin
 {
@@ -14,13 +18,12 @@ public sealed class TokenCreatorPlugin : AbstractPlugin
 	{
 		return new List<IComponent>
 		{
-				new TokenCreatorPage()
+				
 		};
 	}
 
 	public string BordersImagesPath { get; private set; } = null!;
-
-	public const string TOKEN_BORDERS_PREFIX_KEY = "Plugin.TokenCreator.DefaultBorders";
+	private const string TokenBordersPrefixKey = "DefaultBorders";
 
 	private static readonly List<string> DefaultTokens = new()
 	{
@@ -54,7 +57,7 @@ public sealed class TokenCreatorPlugin : AbstractPlugin
 			"wavey_ring_1",
 	};
 
-	private static readonly List<string> Masks = new()
+	private static readonly List<string> DefaultMasks = new()
 	{
 			"10_sided_ring_mask",
 			"12_sided_ring_mask",
@@ -67,7 +70,7 @@ public sealed class TokenCreatorPlugin : AbstractPlugin
 			"wavey_ring_1_mask",
 	};
 
-	public readonly List<Border> Borders = new();
+	public readonly List<BorderObject> Borders = new();
 
 	public override void OnLoad()
 	{
@@ -81,13 +84,50 @@ public sealed class TokenCreatorPlugin : AbstractPlugin
 		}
 
 		SaveDefaultBorders();
+		LoadBorders();
+	}
 
+	/// <summary>
+	///     Loads all borders from the folder.
+	/// </summary>
+	private void LoadBorders()
+	{
 		foreach (var file in Directory.GetFiles(BordersImagesPath, "*.json"))
+		try
 		{
-			var border = JsonConvert.DeserializeObject<Border>(File.ReadAllText(file));
+			var border = JsonConvert.DeserializeObject<BorderObject>(File.ReadAllText(file));
+			if (border == null)
+			{
+				Log.Error("Failed to load border {File}", file);
+				continue;
+			}
 
-			if (border != null) Borders.Add(border);
-			else Log.Error("Failed to load border {File}", file);
+			if (!File.Exists(Path.Combine(BordersImagesPath, border.ImageName)))
+			{
+				Log.Error("Image {ImageName} not found ({Path})",
+						border.ImageName,
+						Path.Combine(BordersImagesPath, border.ImageName));
+				continue;
+			}
+
+			if (!File.Exists(Path.Combine(BordersImagesPath, border.MaskName)))
+			{
+				Log.Error("Mask {MaskName} not found ({Path})",
+						border.MaskName,
+						Path.Combine(BordersImagesPath, border.MaskName));
+				continue;
+			}
+
+			Borders.Add(border);
+
+			Log.Information("Loaded border {BorderName} with (ImageName: {ImageName} - MaskName: {MaskName})",
+					border.BorderName,
+					border.ImageName,
+					border.MaskName);
+		}
+		catch (JsonSerializationException e)
+		{
+			Log.Warning(e, "Failed to load border {File}", file);
 		}
 	}
 
@@ -96,8 +136,6 @@ public sealed class TokenCreatorPlugin : AbstractPlugin
 	/// </summary>
 	private void SaveDefaultBorders()
 	{
-		var assembly = Assembly.GetExecutingAssembly();
-
 		foreach (var defaultToken in DefaultTokens)
 		{
 			var jsonName = $"{defaultToken}.json";
@@ -106,40 +144,19 @@ public sealed class TokenCreatorPlugin : AbstractPlugin
 			var externalJsonPath = Path.Combine(BordersImagesPath, jsonName);
 			var externalImagePath = Path.Combine(BordersImagesPath, imageName);
 
+			Utils.WriteResourceToFileIfNotExists($"{TokenBordersPrefixKey}.{jsonName}",
+					externalJsonPath);
 
-			if (!File.Exists(externalJsonPath))
-			{
-				Log.Information("Copying {JsonName} to {External}", jsonName, externalJsonPath);
-				using var jsonStream = assembly.GetManifestResourceStream($"{TOKEN_BORDERS_PREFIX_KEY}.{jsonName}")!;
-				using var jsonStreamReader = new StreamReader(jsonStream);
-				var jsonBuf = new byte[jsonStream.Length];
-				var readJsonBytes = jsonStream.Read(jsonBuf, 0, jsonBuf.Length);
-
-				File.WriteAllBytes(externalJsonPath, jsonBuf);
-				Log.Information("Read {Bytes} bytes from {Json}", readJsonBytes, jsonName);
-			}
-
-			if (!File.Exists(externalImagePath))
-			{
-				Log.Information("Copying {ImageName} to {External}", imageName, externalImagePath);
-				using var imageStream = assembly.GetManifestResourceStream($"{TOKEN_BORDERS_PREFIX_KEY}.{imageName}")!;
-				using var imageStreamReader = new StreamReader(imageStream);
-				var imageBuf = new byte[imageStream.Length];
-				var readImageBytes = imageStream.Read(imageBuf, 0, imageBuf.Length);
-				File.WriteAllBytes(externalImagePath, imageBuf);
-				Log.Information("Read {Bytes} bytes from {Image}", readImageBytes, imageName);
-			}
+			Utils.WriteResourceToFileIfNotExists($"{TokenBordersPrefixKey}.{imageName}",
+					externalImagePath);
 		}
 
-		foreach (var imageName in Masks.Select(mask => $"{mask}.png"))
+		foreach (var imageName in DefaultMasks.Select(mask => $"{mask}.png"))
 		{
-			using var manifestResourceStream =
-					assembly.GetManifestResourceStream($"{TOKEN_BORDERS_PREFIX_KEY}.{imageName}")!;
-			using var streamReader = new StreamReader(manifestResourceStream);
-			var buf = new byte[manifestResourceStream.Length];
-			var bytes = manifestResourceStream.Read(buf, 0, buf.Length);
-			File.WriteAllBytes(Path.Combine(BordersImagesPath, imageName), buf);
-			Log.Information("Read {Bytes} bytes from {Mask}", bytes, imageName);
+			var externalPath = Path.Combine(BordersImagesPath, $"{imageName}");
+
+			Utils.WriteResourceToFileIfNotExists($"{TokenBordersPrefixKey}.{imageName}",
+					externalPath);
 		}
 
 	}

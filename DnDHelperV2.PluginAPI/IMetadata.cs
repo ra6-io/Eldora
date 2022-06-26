@@ -26,6 +26,11 @@ public interface IMetadata
 	public string Description { get; }
 
 	/// <summary>
+	///     The repository of the Plugin
+	/// </summary>
+	public string Repository { get; }
+
+	/// <summary>
 	/// If the Plugin has visiual Components
 	/// </summary>
 	public bool HasTabComponents { get; }
