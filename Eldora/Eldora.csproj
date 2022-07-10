@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <LangVersion>10</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Eto.Forms" Version="2.7.0"/>
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.1"/>
+        <PackageReference Include="Serilog" Version="2.11.0"/>
+        <PackageReference Include="Serilog.Sinks.Console" Version="4.0.1"/>
+        <PackageReference Include="Serilog.Sinks.File" Version="5.0.0"/>
+        <PackageReference Include="YamlDotNet" Version="11.2.1"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Eldora.PluginAPI\Eldora.PluginAPI.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="Extensions"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Remove="FolderData\settings.json"/>
+        <EmbeddedResource Include="DefaultData\settings.json"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Remove="Resources\icon.ico"/>
+        <EmbeddedResource Include="Resources\icon.ico"/>
+        <None Remove="Resources\icon.svg"/>
+        <EmbeddedResource Include="Resources\icon.svg"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Remove="DefaultData\Updater\Updater.zip"/>
+        <EmbeddedResource Include="DefaultData\Updater\Updater.zip"/>
+    </ItemGroup>
+
+</Project>

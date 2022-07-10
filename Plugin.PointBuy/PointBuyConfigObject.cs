@@ -12,27 +12,27 @@ namespace Plugin.PointBuy;
 public sealed class PointBuyConfigObject
 {
 	/// <summary>
-	/// The number of points available to spend.
+	///     The number of points available to spend.
 	/// </summary>
 	[JsonProperty("available_points")]
 	public int AvailablePoints { get; set; }
 
 	/// <summary>
-	/// The maximum points to spend on a single attribute.
+	///     The maximum points to spend on a single attribute.
 	/// </summary>
 	[JsonProperty("maximum_points")]
 	public int MaximumPurchaseable { get; set; }
 
 	/// <summary>
-	/// The minimum points to spend on a single attribute.
+	///     The minimum points to spend on a single attribute.
 	/// </summary>
 	[JsonProperty("minimum_points")]
 	public int MinimumPurchaseable { get; set; }
 
 	/// <summary>
-	/// The cost of a points.
-	/// <br/>
-	/// Ranges between 3 and 18.
+	///     The cost of a points.
+	///     <br />
+	///     Ranges between 3 and 18.
 	/// </summary>
 	[JsonProperty("point_costs")]
 	public int[] PointCosts { get; set; } = DefaultPointCosts;
@@ -74,7 +74,7 @@ public sealed class PointBuyConfigObject
 	}
 
 	/// <summary>
-	/// Returns the cost of a point.
+	///     Returns the cost of a point.
 	/// </summary>
 	/// <param name="totalScore"></param>
 	/// <returns></returns>

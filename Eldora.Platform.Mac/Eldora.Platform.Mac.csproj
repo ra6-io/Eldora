@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net6.0</TargetFramework>
+
+        <RuntimeIdentifiers>osx-x64;osx-arm64</RuntimeIdentifiers>
+
+        <RootNamespace>Eldora.Mac</RootNamespace>
+
+        <LangVersion>10</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Eldora\Eldora.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Eto.Platform.Mac64" Version="2.7.0"/>
+    </ItemGroup>
+
+</Project>

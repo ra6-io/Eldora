@@ -68,9 +68,7 @@ public sealed class BorderObject
 		var offsetX = (int)(mask.Width / 2.0f - ImageBitmap.Width / 2.0f);
 		var offsetY = (int)(mask.Height / 2.0f - ImageBitmap.Height / 2.0f);
 
-		MaskBitmap = mask.CloneAndExtract(PixelFormat.Format32bppRgba,
-				new Rectangle(offsetX, offsetY, ImageBitmap.Width, ImageBitmap.Height)).MakeRaw();
-
+		MaskBitmap = new RawBitmap(mask.CloneAndExtract(PixelFormat.Format32bppRgba, new Rectangle(offsetX, offsetY, ImageBitmap.Width, ImageBitmap.Height)));
 		CalculateCheckerboardPreview();
 	}
 

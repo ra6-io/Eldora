@@ -1,6 +1,6 @@
 ﻿#region
 
-using DnDHelperV2.PluginAPI;
+using Eldora.PluginAPI;
 using Eto.Drawing;
 using Eto.Forms;
 
@@ -76,22 +76,19 @@ public sealed class PointBuyPage : ITabComponent
 
 		layout.Items.Add(new GroupBox
 		{
-				Text = "Config",
+				Text = "Config"
 		});
 
 		return new Panel
 		{
-				Content = layout,
+				Content = layout
 				// Content = table
 		};
 	}
 
 	private void ResetValues()
 	{
-		foreach (var (_, value) in _attributeData)
-		{
-			value.AbilityScore = PointBuyPlugin.Instance.SelectedConfig().MinimumPurchaseable;
-		}
+		foreach (var (_, value) in _attributeData) value.AbilityScore = PointBuyPlugin.Instance.SelectedConfig().MinimumPurchaseable;
 
 		UpdateEvent?.Invoke(this);
 	}
@@ -102,7 +99,7 @@ public sealed class PointBuyPage : ITabComponent
 		{
 				Text = "0/27",
 				TextAlignment = TextAlignment.Center,
-				Font = TitleFont,
+				Font = TitleFont
 		};
 
 		UpdateEvent += _ =>
@@ -136,7 +133,7 @@ public sealed class PointBuyPage : ITabComponent
 								TextAlignment = TextAlignment.Center
 						}),
 						new TableCell(totalPointsLabel),
-						new TableCell(null),
+						new TableCell(null)
 				}
 		};
 		return tableRow;
@@ -205,8 +202,8 @@ public sealed class PointBuyPage : ITabComponent
 										TextAlignment = TextAlignment.Center
 								},
 								true),
-						new TableCell(null, true),
-				},
+						new TableCell(null, true)
+				}
 		};
 		return tableRow;
 	}
@@ -305,7 +302,7 @@ public sealed class PointBuyPage : ITabComponent
 						new TableCell(abilityModifierLabel),
 						new TableCell(pointCostLabel),
 						new TableCell(null)
-				},
+				}
 		};
 		return tableRow;
 	}
@@ -326,7 +323,7 @@ public sealed class PointBuyPage : ITabComponent
 		}
 
 		/// <summary>
-		/// subtract 10 from the TotalScore and then divide the total by 2
+		///     subtract 10 from the TotalScore and then divide the total by 2
 		/// </summary>
 		/// <returns></returns>
 		public int AbilityModifier()

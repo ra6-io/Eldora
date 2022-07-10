@@ -8,6 +8,11 @@ namespace Plugin.TokenCreator;
 
 public static class BitmapExtensions
 {
+	/// <summary>
+	///     Gets the center point of an image
+	/// </summary>
+	/// <param name="image"></param>
+	/// <returns></returns>
 	public static PointF Center(this Image image)
 	{
 		var size = image.Size;
@@ -45,15 +50,5 @@ public static class BitmapExtensions
 		g.DrawImage(bitmap, new Rectangle(0, 0, bitmap.Width, bitmap.Height), new PointF(0, 0));
 
 		return result;
-	}
-
-	/// <summary>
-	///     Creates a new raw bitmap
-	/// </summary>
-	/// <param name="bitmap"></param>
-	/// <returns></returns>
-	public static RawBitmap MakeRaw(this Bitmap bitmap)
-	{
-		return new RawBitmap(bitmap);
 	}
 }

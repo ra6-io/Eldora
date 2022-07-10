@@ -8,8 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\DnDHelperV2.PluginAPI\DnDHelperV2.PluginAPI.csproj" />
-        <ProjectReference Include="..\DnDHelperV2.Utils\DnDHelperV2.Utils.csproj"/>
+        <ProjectReference Include="..\Eldora.PluginAPI\Eldora.PluginAPI.csproj"/>
     </ItemGroup>
 
     <ItemGroup>

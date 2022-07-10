@@ -1,6 +1,6 @@
 ﻿#region
 
-using DnDHelperV2.PluginAPI;
+using Eldora.PluginAPI;
 
 #endregion
 

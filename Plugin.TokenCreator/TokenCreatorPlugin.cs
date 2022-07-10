@@ -1,6 +1,6 @@
 ﻿#region
 
-using DnDHelperV2.PluginAPI;
+using Eldora.PluginAPI;
 using Newtonsoft.Json;
 using Serilog;
 
@@ -54,7 +54,7 @@ public sealed class TokenCreatorPlugin : AbstractPlugin
 			"plain_square_2",
 			"spike_ring_1",
 			"spike_ring_2",
-			"wavey_ring_1",
+			"wavey_ring_1"
 	};
 
 	private static readonly List<string> DefaultMasks = new()
@@ -67,7 +67,7 @@ public sealed class TokenCreatorPlugin : AbstractPlugin
 			"plain_octagon_mask",
 			"plain_ring_mask",
 			"plain_square_mask",
-			"wavey_ring_1_mask",
+			"wavey_ring_1_mask"
 	};
 
 	public readonly List<BorderObject> Borders = new();
@@ -133,7 +133,7 @@ public sealed class TokenCreatorPlugin : AbstractPlugin
 	}
 
 	/// <summary>
-	/// Saves the default borders to plugin path
+	///     Saves the default borders to plugin path
 	/// </summary>
 	private void SaveDefaultBorders()
 	{

@@ -2,6 +2,7 @@
 
 using System.Runtime.InteropServices;
 using Eto.Drawing;
+using Serilog;
 
 #endregion
 
@@ -46,6 +47,96 @@ public sealed class RawBitmap
 				LocX = i % Bitmap.Width,
 				LocY = i / Bitmap.Width
 		});
+	}
+
+	public RawBitmap(int width, int height)
+	{
+		Bitmap = new Bitmap(width, height, PixelFormat.Format32bppRgba);
+		BitmapData = new byte[width * height * 4];
+
+		BitmapPixelDatas = Enumerable.Range(0, BitmapData.Length / 4).Select(i => new RawBitmapPixelData
+		{
+				B = BitmapData[i * 4 + 0],
+				G = BitmapData[i * 4 + 1],
+				R = BitmapData[i * 4 + 2],
+				A = BitmapData[i * 4 + 3],
+				IsBlack = BitmapData[i * 4 + 0] == 0 &&
+				          BitmapData[i * 4 + 1] == 0 &&
+				          BitmapData[i * 4 + 2] == 0,
+				IsShade = BitmapData[i * 4 + 0] == BitmapData[i * 4 + 1] &&
+				          BitmapData[i * 4 + 1] == BitmapData[i * 4 + 2],
+				IsWhite = BitmapData[i * 4 + 0] == 255 &&
+				          BitmapData[i * 4 + 1] == 255 &&
+				          BitmapData[i * 4 + 2] == 255,
+				Index = i,
+				LocX = i % Bitmap.Width,
+				LocY = i / Bitmap.Width
+		});
+	}
+
+	/// <summary>
+	///     White will be masked ==> Will only be visible
+	/// </summary>
+	/// <param name="bitmap"></param>
+	/// <param name="mask"></param>
+	/// <returns></returns>
+	public static RawBitmap Mask(RawBitmap bitmap, RawBitmap mask)
+	{
+		if (mask.BitmapData.Length > bitmap.BitmapData.Length)
+		{
+			Log.Information("Mask is larger than bitmap");
+			return bitmap;
+		}
+
+		var result = new byte[mask.BitmapData.Length];
+
+		mask.BitmapPixelDatas.AsParallel().ForAll(data =>
+		{
+			var i = data.Index;
+
+			if (!data.IsWhite)
+			{
+				result[i * 4 + 3] = 0;
+			}
+			else
+			{
+				result[i * 4 + 0] = bitmap.BitmapData[i * 4 + 0];
+				result[i * 4 + 1] = bitmap.BitmapData[i * 4 + 1];
+				result[i * 4 + 2] = bitmap.BitmapData[i * 4 + 2];
+				result[i * 4 + 3] = bitmap.BitmapData[i * 4 + 3];
+			}
+		});
+
+		return FromByteData(result, mask.Bitmap.Width, mask.Bitmap.Height)!;
+	}
+
+	public RawBitmap Mask(RawBitmap mask)
+	{
+		return Mask(this, mask);
+	}
+
+	/// <summary>
+	/// </summary>
+	/// <param name="data"></param>
+	/// <param name="width"></param>
+	/// <param name="height"></param>
+	/// <returns></returns>
+	public static RawBitmap? FromByteData(byte[] data, int width, int height)
+	{
+		if (data.Length != width * height * 4)
+		{
+			Log.Information("Data length does not match width * height * 4");
+			return null;
+		}
+
+		var bitmap = new Bitmap(width, height, PixelFormat.Format32bppRgba);
+
+		using (var bitmapRaw = bitmap.Lock())
+		{
+			Marshal.Copy(data, 0, bitmapRaw.Data, data.Length);
+		}
+
+		return new RawBitmap(bitmap);
 	}
 
 	public static byte[] Combine(RawBitmap bottom, RawBitmap top, BlendMode blendMode = BlendMode.Replace)
