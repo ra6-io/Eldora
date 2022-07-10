@@ -15,7 +15,7 @@ public static class Updater
 	{
 		if (args.Length != 3)
 		{
-			Console.WriteLine("Usage: [version] [Wpf|Gtk|Mac] [ProgramPath]");
+			Console.WriteLine("Usage: [version] [wpf|gtk|mac] [ProgramPath]");
 			return;
 		}
 
@@ -72,7 +72,7 @@ public static class Updater
 			foreach (var newestModelAsset in newestModel!.Assets)
 			{
 				// if the file name is not equal to the needed archive name
-				if (!newestModelAsset.Name.EndsWith($"eldora-{currentVersion.ToString(3)}.platorm.{platform}.zip")) continue;
+				if (!newestModelAsset.Name.Equals($"eldora-{currentVersion.ToString(3)}.platform.{platform}.zip")) continue;
 				//if (!newestModelAsset.Name.EndsWith(".zip")) continue;
 
 				Console.WriteLine($"Downloading {newestModelAsset.Name}");

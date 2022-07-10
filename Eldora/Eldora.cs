@@ -59,7 +59,7 @@ public sealed class Eldora
 	/// <summary>
 	///     The version of the program
 	/// </summary>
-	public readonly Version Version = new(0, 0, 1);
+	public readonly Version Version = new(0, 0, 0);
 
 	/// <summary>
 	///     The plugin loader instance
@@ -217,10 +217,11 @@ public sealed class Eldora
 		using var file = new ZipArchive(stream);
 		file.ExtractToDirectory(UpdaterPath, true);
 
-		Log.Information($"v{Version.ToString(3)} Wpf \"{Directory.GetCurrentDirectory()}\"");
+		Log.Information($"v{Version.ToString(3)} wpf \"{Directory.GetCurrentDirectory()}\"");
 
 		var updaterPath = Path.Combine(UpdaterPath, "Eldora.Updater.exe");
-		Process.Start(updaterPath, $"v{Version.ToString(3)} Wpf \"{Directory.GetCurrentDirectory()}\"");
+		Process.Start(updaterPath, $"v{Version.ToString(3)} wpf \"{Directory.GetCurrentDirectory()}\"");
+		Application.Instance.Quit();
 	}
 
 	/// <summary>
