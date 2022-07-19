@@ -8,6 +8,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 import java.util.zip.ZipFile;
@@ -42,8 +45,17 @@ public class PluginHandler {
 		}
 	}
 
-	private void loadPlugin(File file, PluginMetadata metadata) {
+	private void loadPlugin(File file, PluginMetadata metadata) throws MalformedURLException {
 		Eldora.LOGGER.info("Loading Plugin {}.", metadata);
+
+		var child = new URLClassLoader(
+				new URL[] {file.toURI().toURL()},
+				this.getClass().getClassLoader()
+		);
+		var classToLoad = Class.forName("com.MyClass", true, child);
+		var method = classToLoad.getDeclaredMethod("myMethod");
+		Object instance = classToLoad.newInstance();
+		Object result = method.invoke(instance);
 	}
 
 	private PluginMetadata parseMetadata(File fileName, BufferedReader reader) throws IOException {

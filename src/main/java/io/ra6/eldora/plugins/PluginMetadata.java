@@ -7,14 +7,16 @@ import java.util.Arrays;
 public class PluginMetadata {
 	private final String _name;
 	private final String _package;
+	private final String _main;
 	private final String[] _author;
 	private final Version _version;
 	private final String _description;
 	private final String _url;
 
-	public PluginMetadata(String name, String aPackage, String[] author, Version version, String description, String url) {
+	public PluginMetadata(String name, String aPackage, String main, String[] author, Version version, String description, String url) {
 		_name = name;
 		_package = aPackage;
+		_main = main;
 		_author = author;
 		_version = version;
 		_description = description;
@@ -27,6 +29,10 @@ public class PluginMetadata {
 
 	public String getPackage() {
 		return _package;
+	}
+
+	public String getMain() {
+		return _main;
 	}
 
 	public String[] getAuthor() {

@@ -1,6 +1,7 @@
 {
   "name": "Token Creator",
   "package": "io.ra6.eldora.tokencreator",
+  "main": "TokenCreatorPlugin",
   "version": "1.0.0",
   "authors": [
     "Ra6nar0k21"

@@ -9,15 +9,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fd0df991-6b94-408b-b21a-f18678cff7c2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/EldoraPluginApi/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/EldoraUtils/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TokenCreatorPlugin/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+    <list default="true" id="fd0df991-6b94-408b-b21a-f18678cff7c2" name="Changes" comment="ADDED JAVA">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TokenCreatorPlugin/src/main/resources/plugin.json" beforeDir="false" afterPath="$PROJECT_DIR$/TokenCreatorPlugin/src/main/resources/plugin.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/ra6/eldora/plugins/PluginHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/ra6/eldora/plugins/PluginHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,12 +127,37 @@
       <workItem from="1658085664530" duration="3615000" />
       <workItem from="1658161641754" duration="1342000" />
       <workItem from="1658181491642" duration="2332000" />
-      <workItem from="1658187237932" duration="137000" />
+      <workItem from="1658187237932" duration="401000" />
+      <workItem from="1658246618634" duration="54000" />
+      <workItem from="1658251762652" duration="758000" />
     </task>
+    <task id="LOCAL-00001" summary="ADDED JAVA">
+      <created>1658187436880</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1658187436880</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="ADDED JAVA" />
+    <option name="LAST_COMMIT_MESSAGE" value="ADDED JAVA" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
