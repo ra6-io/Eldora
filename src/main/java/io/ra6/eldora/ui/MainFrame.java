@@ -1,11 +1,18 @@
 package io.ra6.eldora.ui;
 
 import io.ra6.Eldora;
+import io.ra6.eldora.components.EldoraTabComponent;
 
 import javax.swing.*;
 import java.awt.*;
 
 public final class MainFrame extends JFrame {
+
+	private final RootPanel _rootPanel;
+
+	public MainFrame() {
+		_rootPanel = new RootPanel(this);
+	}
 
 	public void initialize() {
 		// Load size from settings
@@ -17,10 +24,14 @@ public final class MainFrame extends JFrame {
 		setTitle(Eldora.TITLE);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-		setContentPane(new RootPanel(this));
+		setContentPane(_rootPanel);
 
 		Eldora.LOGGER.info("Showing UI");
 		pack();
 		setVisible(true);
+	}
+
+	public void addTab(EldoraTabComponent tab) {
+		_rootPanel.addTab(tab);
 	}
 }

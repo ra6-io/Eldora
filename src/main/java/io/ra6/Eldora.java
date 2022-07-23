@@ -1,6 +1,7 @@
 package io.ra6;
 
 import io.ra6.eldora.FilePaths;
+import io.ra6.eldora.components.EldoraTabComponent;
 import io.ra6.eldora.plugins.PluginHandler;
 import io.ra6.eldora.ui.MainFrame;
 import org.apache.logging.log4j.Level;
@@ -33,7 +34,6 @@ public class Eldora {
 	 * The default instance of eldora
 	 */
 	private static Eldora INSTANCE;
-
 
 	private PluginHandler _pluginHandler;
 	private MainFrame _mainFrame;
@@ -72,8 +72,15 @@ public class Eldora {
 		LOGGER.info("Loading settings");
 		loadSettings();
 
+		INSTANCE._pluginHandler.onEnable();
+
 		LOGGER.info("Starting UI");
 		startupUi();
+
+		for (EldoraTabComponent tab : INSTANCE._pluginHandler.getAllTabs()) {
+			SwingUtilities.invokeLater(() -> getInstance()._mainFrame.addTab(tab));
+		}
+
 		LOGGER.info("--Finished starting--");
 	}
 
@@ -83,6 +90,8 @@ public class Eldora {
 	private static void shutdown() {
 		LOGGER.info("Shutting down Eldora");
 
+		INSTANCE._pluginHandler.onDisable();
+		INSTANCE._pluginHandler.onUnload();
 	}
 
 	private static void startupUi() {

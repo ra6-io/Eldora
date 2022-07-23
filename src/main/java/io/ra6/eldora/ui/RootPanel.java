@@ -1,5 +1,6 @@
 package io.ra6.eldora.ui;
 
+import io.ra6.eldora.components.EldoraTabComponent;
 import io.ra6.eldora.ui.internal.PluginPanel;
 import io.ra6.eldora.ui.internal.SettingsPanel;
 
@@ -7,11 +8,12 @@ import javax.swing.*;
 import java.awt.*;
 
 public class RootPanel extends JPanel {
-
 	private final MainFrame _parent;
+	private final JTabbedPane _tabComponent;
 
 	public RootPanel(MainFrame parentWindow) {
 		_parent = parentWindow;
+		_tabComponent = new JTabbedPane();
 
 		setLayout(new BorderLayout());
 
@@ -19,12 +21,15 @@ public class RootPanel extends JPanel {
 	}
 
 	private void addComponents() {
-		var tabComponent = new JTabbedPane();
-		tabComponent.setTabPlacement(JTabbedPane.LEFT);
+		_tabComponent.setTabPlacement(JTabbedPane.LEFT);
 
-		tabComponent.addTab("Plugins", new PluginPanel());
-		tabComponent.addTab("Settings", new SettingsPanel());
+		_tabComponent.addTab("Plugins", new PluginPanel());
+		_tabComponent.addTab("Settings", new SettingsPanel());
 
-		add(tabComponent, BorderLayout.CENTER);
+		add(_tabComponent, BorderLayout.CENTER);
+	}
+
+	public void addTab(EldoraTabComponent tab) {
+		_tabComponent.addTab(tab.tabName(), tab.getComponent());
 	}
 }

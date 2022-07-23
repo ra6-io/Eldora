@@ -6,6 +6,9 @@
   "authors": [
     "Ra6nar0k21"
   ],
+  "dependencies": {
+    "EldoraPluginUtils": "1.0.0:"
+  },
   "description": "",
   "url": ""
 }

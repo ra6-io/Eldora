@@ -35,6 +35,10 @@ public class PluginMetadata {
 		return _main;
 	}
 
+	public String getCompletePackage() {
+		return _package + "." + _main;
+	}
+
 	public String[] getAuthor() {
 		return _author;
 	}

@@ -1,20 +1,10 @@
 package io.ra6.eldora.tokencreator;
 
-import io.ra6.eldora.annotations.EldoraPluginLoad;
-import io.ra6.eldora.annotations.EldoraPlugin;
-import io.ra6.eldora.annotations.EldoraPluginUnload;
+import io.ra6.eldora.AbstractEldoraPlugin;
 
-@EldoraPlugin
-public final class TokenCreatorPlugin {
-
-	@EldoraPluginLoad
+public final class TokenCreatorPlugin extends AbstractEldoraPlugin {
+	@Override
 	public void onLoad() {
-
+		addTabComponent(new TokenCreatorTab());
 	}
-
-	@EldoraPluginUnload
-	public void onUnload() {
-
-	}
-
 }

@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="jar" name="TokenCreatorPlugin:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/</output-path>
+    <output-path>$USER_HOME$/AppData/Roaming/Eldora/plugins</output-path>
     <root id="archive" name="TokenCreatorPlugin.jar">
       <element id="module-output" name="TokenCreatorPlugin" />
       <element id="module-output" name="EldoraPluginApi" />
