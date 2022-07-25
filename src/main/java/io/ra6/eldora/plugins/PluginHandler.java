@@ -1,9 +1,9 @@
 package io.ra6.eldora.plugins;
 
-import com.sun.jdi.event.ExceptionEvent;
 import io.ra6.Eldora;
 import io.ra6.Version;
 import io.ra6.eldora.AbstractEldoraPlugin;
+import io.ra6.eldora.FilePaths;
 import io.ra6.eldora.components.EldoraTabComponent;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
@@ -54,19 +54,29 @@ public class PluginHandler {
 		try {
 			Eldora.LOGGER.info("Loading Plugin {}.", metadata);
 
-			URLClassLoader child = null;
-			child = new URLClassLoader(
+			var child = new URLClassLoader(
 					new URL[]{file.toURI().toURL()},
 					this.getClass().getClassLoader()
 			);
+
 			var classToLoad = Class.forName(metadata.getCompletePackage(), true, child);
-			//if (classToLoad.getDeclaredAnnotation(EldoraPlugin.class) != null) {
 			if (AbstractEldoraPlugin.class.isAssignableFrom(classToLoad)) {
 				AbstractEldoraPlugin instance;
 				try {
 					instance = (AbstractEldoraPlugin) classToLoad.getDeclaredConstructor().newInstance();
 					Eldora.LOGGER.info("Loaded Plugin: {}", instance.getClass().getName());
-					var loadedPlugin = new LoadedPlugin(instance, metadata);
+					var pluginFolder = new File(FilePaths.PluginPath, metadata.getName());
+					var loadedPlugin = new LoadedPlugin(instance, metadata, pluginFolder);
+					if (!pluginFolder.exists()) {
+						Eldora.LOGGER.info("Creating folder for plugin {}", metadata.getName());
+						if (!pluginFolder.mkdir()) {
+							Eldora.LOGGER.error("Could not create folder");
+						}
+					} else {
+						Eldora.LOGGER.info("Folder for plugin {} already exists. SKIPPING", metadata.getName());
+					}
+					Thread.currentThread().setContextClassLoader(child);
+
 					_loadedPlugins.add(loadedPlugin);
 				} catch (IllegalAccessException | NoSuchMethodException | NoSuchFieldException e) {
 					Eldora.LOGGER.error("Could not load plugin {}: {}", metadata.getName(), e);
@@ -165,7 +175,7 @@ public class PluginHandler {
 		_loadedPlugins.forEach(loadedPlugin -> {
 			try {
 				Eldora.LOGGER.info("Loading plugin {}", loadedPlugin.getMetadata().getName());
-				loadedPlugin.onLoad();
+				loadedPlugin.onLoad(loadedPlugin.getPluginFolder().getAbsolutePath());
 				Eldora.LOGGER.info("Loaded plugin {}", loadedPlugin.getMetadata().getName());
 			} catch (Exception e) {
 				Eldora.LOGGER.error("Error enabling plugin {}: {}", loadedPlugin.getMetadata().getName(), e);

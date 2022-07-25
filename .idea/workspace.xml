@@ -10,21 +10,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fd0df991-6b94-408b-b21a-f18678cff7c2" name="Changes" comment="äö">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/TokenCreatorPlugin_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/TokenCreatorPlugin_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EldoraPluginApi/src/main/java/io/ra6/eldora/annotations/EldoraPlugin.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/EldoraPluginApi/src/main/java/io/ra6/eldora/annotations/EldoraPluginDisable.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/EldoraPluginApi/src/main/java/io/ra6/eldora/annotations/EldoraPluginEnable.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/EldoraPluginApi/src/main/java/io/ra6/eldora/annotations/EldoraPluginLoad.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/EldoraPluginApi/src/main/java/io/ra6/eldora/annotations/EldoraPluginUnload.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/EldoraPluginApi/src/main/java/io/ra6/eldora/annotations/EldoraSetting.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EldoraPluginApi/src/main/java/io/ra6/eldora/AbstractEldoraPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/EldoraPluginApi/src/main/java/io/ra6/eldora/AbstractEldoraPlugin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TokenCreatorPlugin/src/main/java/io/ra6/eldora/tokencreator/TokenCreatorPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/TokenCreatorPlugin/src/main/java/io/ra6/eldora/tokencreator/TokenCreatorPlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TokenCreatorPlugin/src/main/resources/plugin.json" beforeDir="false" afterPath="$PROJECT_DIR$/TokenCreatorPlugin/src/main/resources/plugin.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/ra6/Eldora.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/ra6/Eldora.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TokenCreatorPlugin/src/main/java/io/ra6/eldora/tokencreator/TokenCreatorTab.java" beforeDir="false" afterPath="$PROJECT_DIR$/TokenCreatorPlugin/src/main/java/io/ra6/eldora/tokencreator/TokenCreatorTab.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/ra6/eldora/plugins/LoadedPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/ra6/eldora/plugins/LoadedPlugin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/ra6/eldora/plugins/PluginHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/ra6/eldora/plugins/PluginHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/ra6/eldora/plugins/PluginMetadata.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/ra6/eldora/plugins/PluginMetadata.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/ra6/eldora/ui/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/ra6/eldora/ui/MainFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/ra6/eldora/ui/RootPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/ra6/eldora/ui/RootPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -75,6 +66,11 @@
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.annotationProcessors&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;PLAIN_TEXT&quot;
+    ]
   }
 }</component>
   <component name="RecentsManager">
@@ -82,6 +78,7 @@
       <recent name="io.ra6.eldora.plugins" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Michael\IdeaProjects\Eldora\TokenCreatorPlugin\src\main\resources\borders" />
       <recent name="C:\Users\Michael\IdeaProjects\Eldora\TokenCreatorPlugin\src\main\resources" />
       <recent name="C:\Users\Michael\IdeaProjects\Eldora\src\main\java" />
       <recent name="C:\Users\Michael\IdeaProjects\Eldora\src\main\java\io\ra6" />
@@ -91,6 +88,7 @@
       <recent name="" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="io.ra6.eldora.tokencreator" />
       <recent name="io.ra6.eldora.plugins" />
       <recent name="io.ra6.eldora.components" />
       <recent name="io.ra6.eldora.annotations" />
@@ -109,6 +107,9 @@
       </extension>
       <method v="2">
         <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="TokenCreatorPlugin:jar" />
+        </option>
       </method>
     </configuration>
     <configuration name="LookAndFeelGrabber" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -118,6 +119,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.Entry" />
+      <item itemvalue="Application.LookAndFeelGrabber" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Entry" />
@@ -150,6 +155,10 @@
       <workItem from="1658251762652" duration="1515000" />
       <workItem from="1658419158735" duration="9248000" />
       <workItem from="1658522442949" duration="13814000" />
+      <workItem from="1658573845229" duration="14705000" />
+      <workItem from="1658653172736" duration="15048000" />
+      <workItem from="1658773112135" duration="5164000" />
+      <workItem from="1658778310885" duration="8951000" />
     </task>
     <task id="LOCAL-00001" summary="ADDED JAVA">
       <created>1658187436880</created>

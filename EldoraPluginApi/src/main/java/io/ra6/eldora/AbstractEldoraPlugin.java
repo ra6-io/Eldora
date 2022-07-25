@@ -27,7 +27,7 @@ public abstract class AbstractEldoraPlugin {
 	public void onDisable() {
 	}
 
-	public void onLoad() {
+	public void onLoad(String pluginPath) {
 	}
 
 	public void onUnload() {

@@ -3,6 +3,7 @@ package io.ra6.eldora.ui;
 import io.ra6.eldora.components.EldoraTabComponent;
 import io.ra6.eldora.ui.internal.PluginPanel;
 import io.ra6.eldora.ui.internal.SettingsPanel;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,7 +30,7 @@ public class RootPanel extends JPanel {
 		add(_tabComponent, BorderLayout.CENTER);
 	}
 
-	public void addTab(EldoraTabComponent tab) {
+	public void addTab(@NotNull EldoraTabComponent tab) {
 		_tabComponent.addTab(tab.tabName(), tab.getComponent());
 	}
 }
