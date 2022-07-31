@@ -206,4 +206,8 @@ public class PluginHandler {
 		}
 		return result;
 	}
+
+	public void removeAllPlugins() {
+		_loadedPlugins.clear();
+	}
 }

@@ -12,6 +12,8 @@ public class RootPanel extends JPanel {
 	private final MainFrame _parent;
 	private final JTabbedPane _tabComponent;
 
+	private int _defaultTabCount = -1;
+
 	public RootPanel(MainFrame parentWindow) {
 		_parent = parentWindow;
 		_tabComponent = new JTabbedPane();
@@ -27,10 +29,18 @@ public class RootPanel extends JPanel {
 		_tabComponent.addTab("Plugins", new PluginPanel());
 		_tabComponent.addTab("Settings", new SettingsPanel());
 
+		_defaultTabCount = _tabComponent.getTabCount();
+
 		add(_tabComponent, BorderLayout.CENTER);
 	}
 
 	public void addTab(@NotNull EldoraTabComponent tab) {
 		_tabComponent.addTab(tab.tabName(), tab.getComponent());
+	}
+
+	public void clearTabs() {
+		for (var i = _defaultTabCount; i < _tabComponent.getTabCount(); i++) {
+			_tabComponent.removeTabAt(i);
+		}
 	}
 }

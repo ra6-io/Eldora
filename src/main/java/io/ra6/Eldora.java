@@ -64,7 +64,7 @@ public class Eldora {
 		FilePaths.createFolderStructure();
 
 		LOGGER.info("Adding shutdown hooks");
-		Runtime.getRuntime().addShutdownHook(new Thread(Eldora::shutdown));
+		Runtime.getRuntime().addShutdownHook(new Thread(Eldora::shutdown, "ShutdownHook"));
 
 		INSTANCE._pluginHandler = new PluginHandler();
 		INSTANCE._pluginHandler.loadPlugins(FilePaths.PluginPath);
@@ -77,9 +77,12 @@ public class Eldora {
 		LOGGER.info("Starting UI");
 		startupUi();
 
-		for (EldoraTabComponent tab : INSTANCE._pluginHandler.getAllTabs()) {
-			SwingUtilities.invokeLater(() -> getInstance()._mainFrame.addTab(tab));
-		}
+		SwingUtilities.invokeLater(() -> {
+			for (EldoraTabComponent tab : getInstance()._pluginHandler.getAllTabs()) {
+				LOGGER.info("Adding tab {}", tab.tabName());
+				getInstance()._mainFrame.addTab(tab);
+			}
+		});
 
 		LOGGER.info("--Finished starting--");
 	}
@@ -92,6 +95,27 @@ public class Eldora {
 
 		INSTANCE._pluginHandler.onDisable();
 		INSTANCE._pluginHandler.onUnload();
+	}
+
+	public static void reloadPlugins() {
+		LOGGER.info("Reloading Plugins");
+
+		INSTANCE._pluginHandler.onDisable();
+		INSTANCE._pluginHandler.onUnload();
+
+		INSTANCE._pluginHandler.removeAllPlugins();
+
+		INSTANCE._pluginHandler.loadPlugins(FilePaths.PluginPath);
+		INSTANCE._pluginHandler.onEnable();
+
+		SwingUtilities.invokeLater(() -> {
+			INSTANCE._mainFrame.clearTabs();
+
+			for (EldoraTabComponent tab : getInstance()._pluginHandler.getAllTabs()) {
+				LOGGER.info("Adding tab {}", tab.tabName());
+				getInstance()._mainFrame.addTab(tab);
+			}
+		});
 	}
 
 	private static void startupUi() {
@@ -131,7 +155,7 @@ public class Eldora {
 	 */
 	private static void initializeLogger() {
 		var logFileName = FilePaths.LogPath.getAbsolutePath();
-		var pattern = "[%d] - [%t] %p %C : %m%n";
+		var pattern = "[%d] - [%t/%p] %C : %m%n";
 
 		// create default logger
 		var builder = ConfigurationBuilderFactory.newConfigurationBuilder();

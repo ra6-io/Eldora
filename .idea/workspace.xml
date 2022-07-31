@@ -11,11 +11,12 @@
   <component name="ChangeListManager">
     <list default="true" id="fd0df991-6b94-408b-b21a-f18678cff7c2" name="Changes" comment="äö">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EldoraPluginApi/src/main/java/io/ra6/eldora/AbstractEldoraPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/EldoraPluginApi/src/main/java/io/ra6/eldora/AbstractEldoraPlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TokenCreatorPlugin/src/main/java/io/ra6/eldora/tokencreator/TokenCreatorPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/TokenCreatorPlugin/src/main/java/io/ra6/eldora/tokencreator/TokenCreatorPlugin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TokenCreatorPlugin/src/main/java/io/ra6/eldora/tokencreator/EditorCanvas.java" beforeDir="false" afterPath="$PROJECT_DIR$/TokenCreatorPlugin/src/main/java/io/ra6/eldora/tokencreator/EditorCanvas.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TokenCreatorPlugin/src/main/java/io/ra6/eldora/tokencreator/TokenCreatorTab.java" beforeDir="false" afterPath="$PROJECT_DIR$/TokenCreatorPlugin/src/main/java/io/ra6/eldora/tokencreator/TokenCreatorTab.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/ra6/eldora/plugins/LoadedPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/ra6/eldora/plugins/LoadedPlugin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TokenCreatorPlugin/src/main/resources/plugin.json" beforeDir="false" afterPath="$PROJECT_DIR$/TokenCreatorPlugin/src/main/resources/plugin.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/ra6/Eldora.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/ra6/Eldora.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/ra6/eldora/plugins/PluginHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/ra6/eldora/plugins/PluginHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/ra6/eldora/ui/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/ra6/eldora/ui/MainFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/ra6/eldora/ui/RootPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/ra6/eldora/ui/RootPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -159,6 +160,11 @@
       <workItem from="1658653172736" duration="15048000" />
       <workItem from="1658773112135" duration="5164000" />
       <workItem from="1658778310885" duration="8951000" />
+      <workItem from="1658847711976" duration="742000" />
+      <workItem from="1658907938665" duration="675000" />
+      <workItem from="1659002117863" duration="647000" />
+      <workItem from="1659117517595" duration="222000" />
+      <workItem from="1659144934397" duration="5878000" />
     </task>
     <task id="LOCAL-00001" summary="ADDED JAVA">
       <created>1658187436880</created>
