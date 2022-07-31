@@ -7,7 +7,10 @@
     "Ra6nar0k21"
   ],
   "dependencies": {
-    "EldoraPluginUtils": "1.0.0:"
+    "EldoraPluginUtils": {
+      "version": "1.0.0:",
+      "mandatory": true
+    }
   },
   "description": "",
   "url": ""

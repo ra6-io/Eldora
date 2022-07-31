@@ -96,7 +96,8 @@ public class TokenCreatorTab extends EldoraTabComponent {
 		c.fill = GridBagConstraints.HORIZONTAL;
 
 		c.weightx = 100;
-		c.weighty = 100;
+		c.weighty = 0;
+		c.anchor = GridBagConstraints.NORTH;
 
 		c.gridx = 0;
 		c.gridy = 0;
@@ -144,8 +145,9 @@ public class TokenCreatorTab extends EldoraTabComponent {
 				}
 			}
 		});
-		c.gridy = 1;
+		c.gridy++;
 		pane.add(selectImageBtn, c);
+
 
 		var exportTokenBtn = new JButton("Export Token");
 		exportTokenBtn.addActionListener(e -> {
@@ -167,7 +169,13 @@ public class TokenCreatorTab extends EldoraTabComponent {
 				}
 			}
 		});
-		c.gridy = 2;
+
+		c.gridy++;
+		c.weighty = 100;
+		pane.add(new JLabel(" "), c);
+
+		c.weighty = 0;
+		c.gridy++;
 		pane.add(exportTokenBtn, c);
 
 		return pane;

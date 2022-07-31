@@ -163,11 +163,11 @@ public class EditorCanvas extends JComponent {
 		var width = subImage.getWidth();
 		var height = subImage.getHeight();
 
-		int[] imagePixels = subImage.getRGB(0, 0, width, height, null, 0, width);
-		int[] maskPixels = mask.getRGB(0, 0, width, height, null, 0, width);
+		var imagePixels = subImage.getRGB(0, 0, width, height, null, 0, width);
+		var maskPixels = mask.getRGB(0, 0, width, height, null, 0, width);
 
-		for (int i = 0; i < imagePixels.length; i++) {
-			int color = maskPixels[i] & 0x00ffffff; // Mask preexisting alpha
+		for (var i = 0; i < imagePixels.length; i++) {
+			var color = maskPixels[i] & 0x00ffffff; // Mask preexisting alpha
 			if (color != 0xffffff) {
 				imagePixels[i] = 0x00000000;
 			}
